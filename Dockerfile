@@ -8,7 +8,10 @@ RUN yarn install
 FROM dependencies AS build
 WORKDIR /app
 COPY . /app
-RUN yarn build
+
+## RUN yarn build
+
+RUN yarn config set "strict-ssl" false -g
 
 FROM nginx:1.16-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
